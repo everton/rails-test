@@ -1,17 +1,27 @@
-Your task if you choose to accept it is to make a products application in Ruby on Rails
+Products Application
 
-=== Front End ===
-  - List out Products
+=== Front End
+  List Products
 
-=== Backend ===
-  - Admin Login
-  - Manage Users
-  - Adding Products
+=== Backend
+  Admin Login
+  Manage Users
+  Adding Products
 
-=== Optionals ===
-  - pagination
-  - search
-  - filter
-  - hover effects
-  - html5 inline editing
-  - use bootstrap
+=== Optionals
+  pagination
+  search
+  filter
+  CSS3 effects
+  html5 inline editing
+  bootstrap
+  cart
+  checkout
+  integration of omniauth
+  capistrano deployment
+  hosted working example
+  github pull requests
+
+=== Requirements
+  no gems or libraries that manage products or users
+  80%+ Code Coverage on Tests (RSpec or Unit)
