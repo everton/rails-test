@@ -1,0 +1,17 @@
+Your task if you choose to accept it is to make a products application in Ruby on Rails
+
+=== Front End ===
+  - List out Products
+
+=== Backend ===
+  - Admin Login
+  - Manage Users
+  - Adding Products
+
+=== Optionals ===
+  - pagination
+  - search
+  - filter
+  - hover effects
+  - html5 inline editing
+  - use bootstrap
