@@ -21,6 +21,7 @@ Products Application
   capistrano deployment
   hosted working example
   github pull requests
+  something awesome
 
 === Requirements
   no gems or libraries that manage products or users
