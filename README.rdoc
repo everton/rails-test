@@ -6,7 +6,7 @@ Products Application
 === Backend
   Admin Login
   Manage Users
-  Adding Products
+  Manage Products
 
 === Optionals
   pagination
