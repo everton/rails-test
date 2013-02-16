@@ -54,3 +54,10 @@ class ActiveSupport::TestCase
     end
   end
 end
+
+class ActionController::TestCase
+  def assert_action_title(title)
+    assert_select 'title', "BcTest - #{title}"
+    assert_select 'h1', title
+  end
+end
