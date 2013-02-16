@@ -60,4 +60,21 @@ class ActionController::TestCase
     assert_select 'title', "BcTest - #{title}"
     assert_select 'h1', title
   end
+
+  def assert_form(action, options = {}, &block)
+    method = options[:method] || :post
+
+    if method == :put || method == :delete
+      _method, method = method, :post
+      test_body = Proc.new do
+        assert_select "input[type='hidden'][name='_method']",
+          value: _method
+        block.call if block
+      end
+    else
+      test_body = block
+    end
+
+    assert_select 'form[action=?][method=?]', action, method, &test_body
+  end
 end
