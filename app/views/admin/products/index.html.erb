@@ -1,0 +1,14 @@
+<%= action_title 'Products' %>
+
+<%= link_to 'New Product', new_admin_product_path %>
+
+<ol id="products">
+  <% @products.each do |product| %>
+  <li>
+    <%= link_to product.name, edit_admin_product_path(product) %>
+
+    <%= button_to 'Delete Product', { action: 'destroy',
+          id: product.id }, method: :delete %>
+  </li>
+  <% end %>
+</ol>
