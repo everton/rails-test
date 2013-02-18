@@ -21,8 +21,10 @@ class ProductsControllerTest < ActionController::TestCase
       assert_select 'li', 3 # products from fixtures
 
       Product.all.each do |product|
-        assert_select 'li a[href=?]', product_path(product),
-          count: 1, text: ERB::Util.h(product.name)
+        path = product_path(product)
+        assert_select 'li a[href=?]', path, count: 1 do
+          assert_select 'h2', ERB::Util.h(product.name)
+        end
       end
     end
   end
