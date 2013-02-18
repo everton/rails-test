@@ -2,6 +2,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   private
+  def self.require_admin(options = {})
+    require_login(options)
+
+    before_filter(options) do
+      redirect_to '/' unless current_user.is_admin?
+      return false
+    end
+  end
+
   def self.require_login(options = {})
     before_filter(options) do
       redirect_to new_session_path unless logged_in?
