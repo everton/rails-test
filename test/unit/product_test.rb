@@ -1,13 +1,19 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
+  include ActionDispatch::TestProcess
+
   fixtures 'products'
 
   test 'basic Product creation' do
     assert_difference 'Product.count' do
-      Product.create name: 'Test product', price: 500,
-        description: 'Lorem ipsum dolor sit amet'
+      @product = Product.create name: 'Test product', price: 500,
+        description: 'Lorem ipsum dolor sit amet',
+        image: fixture_file_upload('images/hal9000.jpg')
     end
+
+    assert_equal '300x225>', @product.image.styles[:medium].geometry
+    assert_equal '100x75>',  @product.image.styles[:thumb ].geometry
   end
 
   test 'counting Products populated from fixtures' do
@@ -53,5 +59,9 @@ class ProductTest < ActiveSupport::TestCase
 
   test 'should avoid products with blank description' do
     assert_bad_value Product, :description, '   ', :blank
+  end
+
+  test 'should avoid products without image' do
+    assert_bad_value Product, :image, nil, :blank
   end
 end

@@ -3,7 +3,12 @@
 <ol id="products">
   <% @products.each do |product| %>
   <li>
-    <%= link_to product.name, product %>
+    <%= link_to product do %>
+      <h2><%= product.name %></h2>
+      <span class="price">$ <%= product.price %></span>
+
+      <%= image_tag product.image %>
+    <% end %>
   </li>
   <% end %>
 </ol>

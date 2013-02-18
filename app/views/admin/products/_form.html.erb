@@ -1,4 +1,4 @@
-<%= form_for [:admin, @product] do |f| %>
+<%= form_for [:admin, @product], html: { multipart: true } do |f| %>
   <% if @product.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -22,6 +22,15 @@
 
     <%= f.label :description %>
     <%= f.text_area :description, :rows => 3 %>
+  </fieldset>
+
+  <fieldset id="general_information">
+    <legend>Product Image</legend>
+
+    <%= image_tag @product.image.url if @product.image %>
+
+    <%= f.label :image %>
+    <%= f.file_field :image %>
   </fieldset>
 
   <fieldset id="actions">

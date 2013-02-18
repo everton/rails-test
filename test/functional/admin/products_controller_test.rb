@@ -76,11 +76,14 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_action_title "Edit - #{@nikon.name}"
 
     assert_form admin_product_path(@nikon), method: :put do
-      assert_select 'input[type="text"][name=?][value=?]',
-        'product[name]', @nikon.name
+      assert_select 'input[type=?][name=?][value=?]',
+        'text', 'product[name]', @nikon.name
 
-      assert_select 'input[type="number"][name=?][value=?]',
-        'product[price]', @nikon.price
+      assert_select 'input[type=?][name=?][value=?]',
+        'number', 'product[price]', @nikon.price
+
+      assert_select 'input[type=?][name=?]',
+        'file', 'product[image]'
 
       assert_select 'textarea[name=?]',
         'product[description]', @nikon.description
@@ -175,9 +178,11 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_action_title 'New Product'
 
     assert_form admin_products_path, method: :post do
-      assert_select 'input[type="text"][name=?]', 'product[name]'
+      assert_select 'input[type=?][name=?]', 'text', 'product[name]'
 
-      assert_select 'input[type="number"][name=?]', 'product[price]'
+      assert_select 'input[type=?][name=?]', 'number', 'product[price]'
+
+      assert_select 'input[type=?][name=?]', 'file', 'product[image]'
 
       assert_select 'textarea[name=?]', 'product[description]'
     end
@@ -212,7 +217,8 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_difference 'Product.count' do
       post :create, product: {
         name: 'My Test Product', price: 500,
-        description: 'Lorem Ipsum'
+        description: 'Lorem Ipsum',
+        image: fixture_file_upload('images/hal9000.jpg')
       }
     end
 

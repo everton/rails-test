@@ -4,6 +4,8 @@ source 'http://gems.github.com'
 gem 'rails', '3.2.8'
 gem 'jquery-rails'
 
+gem 'paperclip', github: 'thoughtbot/paperclip'
+
 gem 'sqlite3'
 
 # Gems used only for assets and not required
