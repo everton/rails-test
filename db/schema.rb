@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130218172638) do
     t.float    "price"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.datetime "deleted_at"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

@@ -3,7 +3,7 @@ require 'test_helper'
 class ProductTest < ActiveSupport::TestCase
   include ActionDispatch::TestProcess
 
-  fixtures 'products'
+  fixtures 'line_items', 'products'
 
   test 'basic Product creation' do
     assert_difference 'Product.count' do
@@ -35,14 +35,26 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal 'New Test Name', @nikon.reload.name
   end
 
-  test 'destroy existing Product' do
-    assert_difference 'Product.count', -1 do
-      @nikon.destroy
+  test 'destroy existing Product marking it as destroyed' do
+    # The unescoped count verifies for paranoid model
+    assert_no_difference 'Product.unscoped.count' do
+      assert_difference 'Product.count', -1 do
+        @nikon.destroy
+      end
     end
 
     assert_raises ActiveRecord::RecordNotFound do
       Product.find @nikon.id
     end
+
+    Product.with_deleted do
+      assert_equal @nikon, Product.find(@nikon.id)
+    end
+  end
+
+  test 'line_item relation' do
+    assert_equal [@li_john_nikon, @li_paul_nikon].sort,
+      @nikon.line_items.sort
   end
 
   test 'should avoid products with blank name' do

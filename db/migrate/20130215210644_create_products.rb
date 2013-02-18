@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration
       t.float :price
 
       t.timestamps
+      t.datetime :deleted_at
     end
   end
 end
