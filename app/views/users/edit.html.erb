@@ -1,0 +1,9 @@
+<%= action_title "Edit #{@user.email_was} account" %>
+
+<%= form_tag user_path(@user), method: :delete do %>
+  <fieldset id="actions">
+    <%= submit_tag 'Delete my account', confirm: 'Are you sure?' %>
+  </fieldset>
+<% end %>
+
+<%= render 'form' %>
