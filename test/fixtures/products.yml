@@ -2,13 +2,25 @@ sony_hd:
   name: Sony 2.5" Portable Hard Drive
   description: $578 and up Sony 500GB OR 1TGB 2.5" Portable Hard Drive with Pouch available in Black, Silver and Pink; Aluminum Case Design; Capacity with NTFS formatted; USB 3.0 High Speed Transfers; Password Protection Manger software provided; PLUS get Complimentary Sony Red Packets upon purchase(Up to $2458 value)
   price: 578
+  image_file_name: sony_hd.jpg
+  image_content_type: image/jpeg
+  image_file_size: 64756
+  image_updated_at: <%= DateTime.now.to_s(:db) %>
 
 monster_beats:
   name: Monster® Beats™ ibeats™ by Dr. Dre
   description: $480 Monster® Beats™ ibeats™ by Dr. Dre available in White and Black; Made to be an upgrade with more durability and better sound; Suitable for gadgets with 3.5mm jacks; Keep the cool at high volumes! 1 month warranty! Delivery service available! ($1080 value)
   price: 480
+  image_file_name: monster_beats.jpg
+  image_content_type: image/jpeg
+  image_file_size: 329811
+  image_updated_at: <%= DateTime.now.to_s(:db) %>
 
 nikon:
   name: Nikon Cameras + 1yr Warranty
   description: $580 and up Nikon Cameras (V1/P7100/S225/D300S) PLUS 1-Year Warranty! Digital point-and-shoot cameras, DSL-R cameras, up to 13.1MP, optical viewfinder, large LCD screen display, HDMI HD video output + MORE! (up to $13500 value)
   price: 580
+  image_file_name: nikon.jpg
+  image_content_type: image/jpeg
+  image_file_size: 201312
+  image_updated_at: <%= DateTime.now.to_s(:db) %>
