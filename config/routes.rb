@@ -1,11 +1,13 @@
 BcTest::Application.routes.draw do
   resources :products, only: [:show, :index]
 
+  # TODO: user resource should be account...
   resource :user,    only: [:new, :create, :edit, :update, :destroy]
   resource :session, only: [:new, :create, :destroy]
 
   namespace :admin do
     resources :products
+    resources :users
   end
 
   # The priority is based upon order of creation:

@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# TODO: simplify permissions test scenarios with macros (shoulda like)
 class Admin::ProductsControllerTest < ActionController::TestCase
   fixtures 'products', 'users'
 
