@@ -2,6 +2,7 @@ class LineItem < ActiveRecord::Base
   attr_accessible :product_id, :quantity
 
   belongs_to :product
+  belongs_to :order
 
   validates :product_id, presence: true
   validates :quantity,   presence: true, numericality: {

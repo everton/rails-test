@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class LineItemTest < ActiveSupport::TestCase
-  fixtures 'line_items', 'products'
+  fixtures 'line_items', 'orders', 'products'
 
   test 'basic LineItem creation' do
     assert_difference 'LineItem.count' do
@@ -77,7 +77,9 @@ class LineItemTest < ActiveSupport::TestCase
     assert_equal @nikon.price * 2, @li.total
   end
 
-  test 'order relation'
+  test 'order relation' do
+    assert_equal @order_paul, @li_paul_nikon.order
+  end
 
   test 'product relation' do
     assert_equal @nikon, @li_john_nikon.product
