@@ -1,0 +1,14 @@
+li_paul_sony_hd:
+  product: sony_hd
+  price: 578
+  quantity: 2
+
+li_paul_nikon:
+  product: nikon
+  price: 580
+  quantity: 1
+
+li_john_nikon:
+  product: nikon
+  price: 580
+  quantity: 1
