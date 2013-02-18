@@ -55,12 +55,7 @@ class ActiveSupport::TestCase
   end
 end
 
-class ActionController::TestCase
-  def assert_action_title(title)
-    assert_select 'title', "BcTest - #{title}"
-    assert_select 'h1', title
-  end
-
+module FormAssertions
   def assert_form(action, options = {}, &block)
     method = options[:method] || :post
 
@@ -77,4 +72,17 @@ class ActionController::TestCase
 
     assert_select 'form[action=?][method=?]', action, method, &test_body
   end
+end
+
+class ActionController::TestCase
+  include FormAssertions
+
+  def assert_action_title(title)
+    assert_select 'title', "BcTest - #{title}"
+    assert_select 'h1', title
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include FormAssertions
 end
