@@ -11,7 +11,7 @@
 
   <div id="account">
     <% if logged_in? %>
-      <%= link_to current_user.email, edit_user_path(current_user) %>
+      <%= link_to current_user.email, edit_user_path %>
       <%= form_tag session_path, method: :delete do %>
         <fieldset id="actions">
           <%= submit_tag 'Logout' %>

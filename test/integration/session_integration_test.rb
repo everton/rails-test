@@ -17,7 +17,7 @@ class SessionIntegrationTest < ActionDispatch::IntegrationTest
 
     get '/'
 
-    assert_select 'a[href=?]', edit_user_path(@john), @john.email
+    assert_select 'a[href=?]', edit_user_path, @john.email
 
     assert_form session_path, method: :delete do
       assert_select 'input[type="submit"][value="Logout"]'
@@ -30,7 +30,7 @@ class SessionIntegrationTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', new_session_path, 'Login'
     assert_select 'a[href=?]', new_user_path,    'Signup'
 
-    post '/users', user: {
+    post '/user', user: {
       email: 'test_user@example.com',
       password: '123', password_confirmation: '123'
     }
@@ -41,7 +41,7 @@ class SessionIntegrationTest < ActionDispatch::IntegrationTest
 
     user = User.where(email: 'test_user@example.com').first
 
-    assert_select 'a[href=?]', edit_user_path(user),
+    assert_select 'a[href=?]', edit_user_path,
       'test_user@example.com'
   end
 
@@ -52,15 +52,15 @@ class SessionIntegrationTest < ActionDispatch::IntegrationTest
 
     get '/'
 
-    assert_select 'a[href=?]', edit_user_path(@john), @john.email
+    assert_select 'a[href=?]', edit_user_path, @john.email
 
-    get edit_user_path(@john)
+    get edit_user_path
 
-    assert_form user_path(@john), method: :delete do
+    assert_form user_path, method: :delete do
       assert_select 'input[type="submit"][value="Delete my account"]'
     end
 
-    delete user_path(@john)
+    delete user_path
 
     assert_redirected_to '/'
 

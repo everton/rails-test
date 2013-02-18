@@ -1,7 +1,7 @@
 BcTest::Application.routes.draw do
   resources :products, only: [:show, :index]
-  resources :users,  except: [:show, :index]
 
+  resource :user,    only: [:new, :create, :edit, :update, :destroy]
   resource :session, only: [:new, :create, :destroy]
 
   namespace :admin do
