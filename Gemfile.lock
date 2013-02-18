@@ -54,6 +54,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    delete_paranoid (1.0.4)
+      activerecord
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -123,6 +125,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
+  delete_paranoid
   jquery-rails
   mysql2
   paperclip!
