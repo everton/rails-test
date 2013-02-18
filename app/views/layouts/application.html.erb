@@ -9,7 +9,21 @@
 </head>
 <body>
 
-<%= yield %>
+  <div id="account">
+    <% if logged_in? %>
+      <%= link_to current_user.email, edit_user_path(current_user) %>
+      <%= form_tag session_path, method: :delete do %>
+        <fieldset id="actions">
+          <%= submit_tag 'Logout' %>
+        </fieldset>
+      <% end %>
+    <% else %>
+      <%= link_to 'Login', new_session_path %>
+      <%= link_to 'Signup',   new_user_path %>
+    <% end %>
+  </div>
+
+  <%= yield %>
 
 </body>
 </html>
