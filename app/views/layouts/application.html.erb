@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <h1><%= link_to 'Bc Test', '/' %></h1>
 
   <div id="account">
     <% if logged_in? %>
@@ -22,6 +23,16 @@
       <%= link_to 'Signup',   new_user_path %>
     <% end %>
   </div>
+
+  <% if logged_in? and current_user.is_admin? %>
+  <nav id="admin">
+    <h1>Admin</h1>
+    <ul>
+      <%= link_to 'Products', admin_products_path %>
+      <%= link_to 'Users',    admin_users_path %>
+    </ul>
+  </nav>
+  <% end %>
 
   <%= yield %>
 
