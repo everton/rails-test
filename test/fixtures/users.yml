@@ -1,0 +1,22 @@
+# Digested Password for '123'
+<% pass = "$2a$10$DV8TPz67HLfzStiuHzrzG.luP.g/GVmz1Z7Wl5QWeeOMFrSYe1T2e" %>
+
+george:
+  email: george.harrison@example.com
+  password_digest: <%= pass %>
+  is_admin: true
+
+john:
+  email: john.lennon@example.com
+  password_digest: <%= pass %>
+  is_admin: false
+
+paul:
+  email: paul.mccartney@example.com
+  password_digest: <%= pass %>
+  is_admin: false
+
+ringo:
+  email: ringo.starr@example.com
+  password_digest: <%= pass %>
+  is_admin: false

@@ -1,14 +1,28 @@
 require 'test_helper'
 
+# TODO: simplify permissions test scenarios with macros (shoulda like)
 class Admin::ProductsControllerTest < ActionController::TestCase
-  fixtures 'products'
+  fixtures 'products', 'users'
 
   test 'recognition of index' do
     assert_routing({path: '/admin/products', method: :get},
       {controller: 'admin/products', action: 'index'})
   end
 
-  test 'GET index as HTML' do
+  test 'GET index as HTML unlogged' do
+    get :index
+    assert_redirected_to '/session/new'
+  end
+
+  test 'GET index as HTML logged in as common user' do
+    session[:user_id] = @john.id
+    get :index
+    assert_redirected_to '/'
+  end
+
+  test 'GET index as HTML logged in as admin' do
+    session[:user_id] = @george.id
+
     get :index
 
     assert_response :success
@@ -39,7 +53,20 @@ class Admin::ProductsControllerTest < ActionController::TestCase
       {controller: 'admin/products', action: 'edit', id: '123'})
   end
 
-  test "GET edit as HTML" do
+  test 'GET edit as HTML unlogged' do
+    get :edit, id: @nikon.to_param
+    assert_redirected_to '/session/new'
+  end
+
+  test 'GET edit as HTML logged in as common user' do
+    session[:user_id] = @john.id
+    get :edit, id: @nikon.to_param
+    assert_redirected_to '/'
+  end
+
+  test 'GET edit as HTML logged in as admin' do
+    session[:user_id] = @george.id
+
     get :edit, id: @nikon.to_param
 
     assert_response :success
@@ -65,7 +92,25 @@ class Admin::ProductsControllerTest < ActionController::TestCase
       {controller: 'admin/products', action: 'update', id: '123'})
   end
 
-  test 'PUT to update as HTML' do
+  test 'PUT to update as HTML unlogged' do
+    put(:update, id: @nikon.to_param, product: {
+          name: 'My Test Product'
+        })
+
+    assert_redirected_to '/session/new'
+  end
+
+  test 'PUT to update as HTML logged in as common user' do
+    session[:user_id] = @john.id
+    put(:update, id: @nikon.to_param, product: {
+          name: 'My Test Product'
+        })
+    assert_redirected_to '/'
+  end
+
+  test 'PUT to update as HTML logged in as admin' do
+    session[:user_id] = @george.id
+
     assert_no_difference 'Product.count' do
       put(:update, id: @nikon.to_param, product: {
             name: 'My Test Product'
@@ -79,7 +124,9 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_equal 'My Test Product', @nikon.reload.name
   end
 
-  test 'PUT invalid parameters to update as HTML' do
+  test 'PUT invalid parameters to update as HTML logged in as admin' do
+    session[:user_id] = @george.id
+
     assert_no_difference 'Product.count' do
       put(:update, id: @nikon.to_param, product: {
             name: '     '
@@ -105,7 +152,20 @@ class Admin::ProductsControllerTest < ActionController::TestCase
       {controller: 'admin/products', action: 'new'})
   end
 
-  test "GET new as HTML" do
+  test 'GET new as HTML unlogged' do
+    get :new
+    assert_redirected_to '/session/new'
+  end
+
+  test 'GET new as HTML logged in as common user' do
+    session[:user_id] = @john.id
+    get :new
+    assert_redirected_to '/'
+  end
+
+  test 'GET new as HTML logged in as admin' do
+    session[:user_id] = @george.id
+
     get :new
 
     assert_response :success
@@ -128,7 +188,27 @@ class Admin::ProductsControllerTest < ActionController::TestCase
       {controller: 'admin/products', action: 'create'})
   end
 
-  test 'POST to create as HTML' do
+  test 'POST to create as HTML unlogged' do
+    post :create, product: {
+      name: 'My Test Product', price: 500,
+      description: 'Lorem Ipsum'
+    }
+
+    assert_redirected_to '/session/new'
+  end
+
+  test 'POST to create as HTML logged in as common user' do
+    session[:user_id] = @john.id
+    post :create, product: {
+      name: 'My Test Product', price: 500,
+      description: 'Lorem Ipsum'
+    }
+    assert_redirected_to '/'
+  end
+
+  test 'POST to create as HTML logged in as admin' do
+    session[:user_id] = @george.id
+
     assert_difference 'Product.count' do
       post :create, product: {
         name: 'My Test Product', price: 500,
@@ -141,7 +221,9 @@ class Admin::ProductsControllerTest < ActionController::TestCase
     assert_equal 'text/html', response.content_type
   end
 
-  test 'POST invalid parameters to create as HTML' do
+  test 'POST invalid parameters to create as HTML logged in as admin' do
+    session[:user_id] = @george.id
+
     assert_no_difference 'Product.count' do
       post :create, product: {
         name: '     ', price: 500,
@@ -168,7 +250,19 @@ class Admin::ProductsControllerTest < ActionController::TestCase
       {controller: 'admin/products', action: 'destroy', id: '123'})
   end
 
-  test 'DELETE to destroy as HTML' do
+  test 'DELETE to destroy as HTML unlogged' do
+    delete :destroy, id: @nikon.to_param
+    assert_redirected_to '/session/new'
+  end
+
+   test 'DELETE to destroy as HTML logged in as common user' do
+    session[:user_id] = @john.id
+    delete :destroy, id: @nikon.to_param
+    assert_redirected_to '/'
+  end
+
+  test 'DELETE to destroy as HTML logged in as admin' do
+    session[:user_id] = @george.id
     delete :destroy, id: @nikon.to_param
 
     assert_redirected_to admin_products_path

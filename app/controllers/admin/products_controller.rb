@@ -1,6 +1,8 @@
 class Admin::ProductsController < ApplicationController
   respond_to :html
 
+  require_admin
+
   def index
     @products = Product.all
     respond_with :admin, @products
