@@ -6,6 +6,8 @@ gem 'jquery-rails'
 
 gem 'paperclip', github: 'thoughtbot/paperclip'
 
+gem 'delete_paranoid'
+
 gem 'sqlite3'
 
 # Gems used only for assets and not required

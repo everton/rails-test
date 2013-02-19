@@ -45,5 +45,16 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_select '#price',  "$ #{@nikon.price}"
     assert_select '#description', @nikon.description
+    assert_select 'img[src=?]',   @nikon.image.url
+
+    assert_form '/cart', method: :post do
+      assert_select 'input[type=?][name=?][value=?]',
+        'hidden', 'line_item[quantity]', '1'
+
+      assert_select 'input[type=?][name=?][value=?]',
+        'hidden', 'line_item[product_id]', @nikon.to_param
+
+      assert_select 'input[type=?][value=?]', 'submit', 'Add to cart'
+    end
   end
 end

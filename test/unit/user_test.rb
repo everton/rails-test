@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  fixtures 'users'
+  fixtures 'users', 'orders'
 
   test 'basic User creation' do
     assert_difference 'User.count' do
@@ -32,9 +32,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 'new_test_user@example.com', @john.reload.email
   end
 
-  test 'destroy existing User' do
+  test 'destroy existing User and associated Orders' do
     assert_difference 'User.count', -1 do
-      @john.destroy
+      assert_difference 'Order.count', -1 do
+        @john.destroy
+      end
     end
 
     assert_raises ActiveRecord::RecordNotFound do
@@ -81,5 +83,9 @@ class UserTest < ActiveSupport::TestCase
     @user.save!
 
     assert @user.reload.is_admin?
+  end
+
+  test 'orders relation' do
+    assert_equal [@order_paul], @paul.orders
   end
 end

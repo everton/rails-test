@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  fixtures 'users'
+  fixtures 'products', 'users'
 
   test 'recognition of new (signup)' do
     assert_routing({path: '/user/new', method: :get},
@@ -65,6 +65,23 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to '/'
 
     assert_equal 'text/html', response.content_type
+  end
+
+  test 'asssociate session order with user at signup' do
+    @order = Order.create line_items_attributes: [
+        { product_id: @nikon.id, quantity: 6 }
+      ]
+
+    session[:order_id] = @order.id
+
+    post :create, user: {
+      email: 'test_user@example.com',
+      password: '123', password_confirmation: '123'
+    }
+
+    @user = User.find_by_email! 'test_user@example.com'
+
+    assert_equal @user, @order.reload.user
   end
 
   test 'POST invalid parameters to create as HTML' do

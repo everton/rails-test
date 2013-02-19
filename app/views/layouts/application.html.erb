@@ -10,6 +10,12 @@
 <body>
   <h1><%= link_to 'Bc Test', '/' %></h1>
 
+  <% if flash[:error] %>
+  <div id="flash" class="error">
+    <%= flash[:error] %>
+  </div>
+  <% end %>
+
   <div id="account">
     <% if logged_in? %>
       <%= link_to current_user.email, edit_user_path %>
@@ -22,6 +28,8 @@
       <%= link_to 'Login', new_session_path %>
       <%= link_to 'Signup',   new_user_path %>
     <% end %>
+
+    <%= link_to 'Cart', cart_path %>
   </div>
 
   <% if logged_in? and current_user.is_admin? %>

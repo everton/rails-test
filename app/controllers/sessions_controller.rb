@@ -13,8 +13,17 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+
+      # TODO: put current_order logic at some helper
+      if session[:order_id]
+        @order = Order.find session[:order_id]
+        @order.user = @user
+        @order.save
+      end
+
       redirect_to root_url
     else
+      flash[:error] = 'Invalid password or username'
       render :new
     end
   end

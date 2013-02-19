@@ -7,9 +7,13 @@ class Product < ActiveRecord::Base
       medium: ['300x225>', 'jpeg'], thumb: ['100x75>', 'jpeg']
     }
 
+  acts_as_paranoid
+
   validates :name,             presence: true, uniqueness: true
   validates :price,            presence: true
   validates :description,      presence: true
 
   validates_attachment :image, presence: true
+
+  has_many :line_items
 end
