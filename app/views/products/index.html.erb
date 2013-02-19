@@ -4,10 +4,10 @@
   <% @products.each do |product| %>
   <li>
     <%= link_to product do %>
+      <%= image_tag product.image %>
+
       <h2><%= product.name %></h2>
       <span class="price">$ <%= product.price %></span>
-
-      <%= image_tag product.image %>
     <% end %>
   </li>
   <% end %>

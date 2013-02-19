@@ -1,3 +1,58 @@
-// Place all the styles related to the cart controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#cart {
+		#line_items {
+				li {
+						clear: both;
+						list-style: none;
+						width: 90%;
+						height: 80px;
+						padding: 20px 10px 5px 10px;
+
+						a.product {
+								float: left;
+
+								h2{
+          display: block;
+										float: right;
+										width: 300px;
+										margin: 0;
+								}
+								img {
+										margin-right: 15px;
+								}
+						}
+
+						select.quantity {
+								width: 120px;
+								margin: 0 20px;
+						}
+
+						.sub_total {
+								float: right;
+								margin: 0;
+						}
+				}
+
+		  li:nth-child(even) {
+						border-top: 1px solid #CCC;
+				}
+		}
+
+		#order_summary {
+				text-align: right;
+				font-size: 20px;
+				font-weight: bold;
+
+				#order_total {
+	  			color: #F6AC19;
+			  	font-size: 24px;
+				  font-weight: bold;
+				}
+		}
+
+		#actions {
+				border: none;
+				width: auto;
+				float: right;
+				padding: 10px 0 10px 15px;
+		}
+}

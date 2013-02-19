@@ -6,13 +6,15 @@
       <%= f.fields_for :line_items do |item_form, li = item_form.object| %>
       <li rel="<%= li.id %>">
         <%= item_form.hidden_field :id %>
-        <%= link_to product_path(li.product) do %>
+        <%= link_to product_path(li.product), class: 'product' do %>
           <h2><%= li.product.name %></h2>
           <%= image_tag li.product.image.url(:thumb) %>
         <% end %>
 
         <%= item_form.select :quantity, 0..9, {}, { class: 'quantity' } %>
-        <span class="sub_total">$ <%= li.total %></span>
+        <p class="sub_total">
+          Subtotal: <span class="price">$ <%= li.total %></span>
+        </p>
       </li>
       <% end %>
     </ol>

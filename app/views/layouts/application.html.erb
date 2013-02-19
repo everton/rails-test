@@ -8,41 +8,50 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h1><%= link_to 'Bc Test', '/' %></h1>
+  <header>
+    <h1><%= link_to 'Bc Test', '/' %></h1>
 
-  <% if flash[:error] %>
-  <div id="flash" class="error">
-    <%= flash[:error] %>
-  </div>
-  <% end %>
-
-  <div id="account">
-    <% if logged_in? %>
-      <%= link_to current_user.email, edit_user_path %>
-      <%= form_tag session_path, method: :delete do %>
-        <fieldset id="actions">
-          <%= submit_tag 'Logout' %>
-        </fieldset>
+    <section id="account">
+      <% if logged_in? %>
+        <%= link_to current_user.email, edit_user_path %>
+        <%= form_tag session_path, method: :delete do %>
+          <fieldset id="actions">
+            <%= submit_tag 'Logout' %>
+          </fieldset>
+        <% end %>
+      <% else %>
+        <%= link_to 'Signup',   new_user_path %>
+        <%= link_to 'Login', new_session_path %>
       <% end %>
-    <% else %>
-      <%= link_to 'Login', new_session_path %>
-      <%= link_to 'Signup',   new_user_path %>
+
+      <%# TODO: replace logic on layout view with helpers %>
+      <% if session[:order_id] %>
+        <%= link_to cart_path do %>
+        Cart (<%= Order.find(session[:order_id]).line_items.count %>)
+        <% end %>
+      <% end %>
+    </section>
+
+    <% if logged_in? and current_user.is_admin? %>
+      <nav id="admin">
+        <h1>Admin</h1>
+
+        <ul>
+          <li><%= link_to 'Products', admin_products_path %></li>
+          <li><%= link_to 'Users',    admin_users_path %></li>
+        </ul>
+      </nav>
+    <% end %>
+  </header>
+
+  <section id="main">
+    <% if flash[:error] || flash[:notice] %>
+    <div id="flash" class="<%= flash[:error] ? 'error' : 'notice' %>">
+      <%= flash[:error] || flash[:notice] %>
+    </div>
     <% end %>
 
-    <%= link_to 'Cart', cart_path %>
-  </div>
-
-  <% if logged_in? and current_user.is_admin? %>
-  <nav id="admin">
-    <h1>Admin</h1>
-    <ul>
-      <%= link_to 'Products', admin_products_path %>
-      <%= link_to 'Users',    admin_users_path %>
-    </ul>
-  </nav>
-  <% end %>
-
-  <%= yield %>
-
+    <%= yield %>
+  </section>
 </body>
 </html>

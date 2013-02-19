@@ -1,3 +1,56 @@
-// Place all the styles related to the Products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#products {
+		padding: 0;
+
+		li {
+				list-style: none;
+				float: left;
+				width:  300px;
+				height: 320px;
+
+				a {
+						text-decoration: none;
+
+						img {
+								width: 300px;
+								height: 172px;
+						}
+
+						h2 {
+								color: #565656;
+    				width: 300px;
+        font-size: 16px;
+								margin: 5px 0;
+						}
+
+						.price {
+								color: #F6AC19;
+								font-size: 24px;
+								font-weight: bold;
+						}
+				}
+
+				&:nth-child(3n)   { margin: 0; }
+				&:nth-child(3n+1) { margin: 0; }
+				&:nth-child(3n+2) { margin: 0 30px 0;   }
+		}
+}
+
+#product {
+		#price {
+				color: #F6AC19;
+				font-size: 24px;
+				font-weight: bold;
+		}
+
+		img {
+				float: left;
+				margin-right: 15px;
+		}
+
+		form {
+				fieldset {
+						border: none;
+						margin: 10px;
+				}
+		}
+}

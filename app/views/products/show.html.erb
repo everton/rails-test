@@ -1,17 +1,19 @@
 <%= action_title @product.name %>
 
-<span id="price">$ <%= @product.price %></span>
+<section id="product">
+  <span id="price">$ <%= @product.price %></span>
 
-<%= form_tag cart_path, method: :post do %>
-  <fieldset id="actions">
-    <%= hidden_field_tag 'line_item[quantity]', 1 %>
-    <%= hidden_field_tag 'line_item[product_id]', @product.id %>
-    <%= submit_tag 'Add to cart' %>
-  </fieldset>
-<% end %>
+  <%= image_tag @product.image.url %>
 
-<%= image_tag @product.image.url %>
+  <div id="description">
+    <%= @product.description %>
+  </div>
 
-<div id="description">
-  <%= @product.description %>
-</div>
+  <%= form_tag cart_path, method: :post do %>
+    <fieldset id="actions">
+      <%= hidden_field_tag 'line_item[quantity]', 1 %>
+      <%= hidden_field_tag 'line_item[product_id]', @product.id %>
+      <%= submit_tag 'Add to cart' %>
+    </fieldset>
+  <% end %>
+</section>
