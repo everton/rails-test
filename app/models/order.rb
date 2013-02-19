@@ -1,8 +1,6 @@
 class Order < ActiveRecord::Base
   attr_accessible :user_id, :line_items_attributes
 
-  validates  :user_id, presence: true
-
   belongs_to :user
 
   has_many :line_items, dependent: :destroy

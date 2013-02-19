@@ -72,6 +72,10 @@ module FormAssertions
 
     assert_select 'form[action=?][method=?]', action, method, &test_body
   end
+
+  def assert_selected_option(value, text = value.to_s)
+    assert_select("option[selected=selected][value=#{value}]", text)
+  end
 end
 
 class ActionController::TestCase

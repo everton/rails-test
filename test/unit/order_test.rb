@@ -57,10 +57,6 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
-  test 'avoid blank user' do
-    assert_bad_value Order, :user_id, nil, :blank
-  end
-
   test 'user relation' do
     assert_equal @paul, @order_paul.user
   end

@@ -1,0 +1,14 @@
+<%= action_title 'Cart' %>
+
+<section id="cart" class="container">
+  <%# TODO deleted_products_disclaimer' %>
+
+  <% if @order.line_items.empty? %>
+  <div id="empty_cart_disclaimer">
+    <span>Your cart is empty</span>
+    <%= link_to 'Continue Shopping', '/' %>
+  </div>
+  <% else %>
+    <%= render 'form' %>
+  <% end %>
+</section>

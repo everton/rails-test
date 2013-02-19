@@ -16,7 +16,16 @@ class UsersController < ApplicationController
 
     @user = User.create params[:user]
 
-    session[:user_id] = @user if @user.errors.empty?
+    if @user.errors.empty?
+      session[:user_id] = @user
+
+      # TODO: put current_order logic at some helper
+      if session[:order_id]
+        @order = Order.find session[:order_id]
+        @order.user = @user
+        @order.save
+      end
+    end
 
     respond_with @user, location: '/'
   end

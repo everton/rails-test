@@ -10,6 +10,11 @@ BcTest::Application.routes.draw do
     resources :users
   end
 
+  post   '/cart' => 'cart#populate'
+  get    '/cart' => 'cart#edit'
+  put    '/cart' => 'cart#update'
+  delete '/cart' => 'cart#destroy'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

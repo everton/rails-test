@@ -27,10 +27,10 @@
   <fieldset id="general_information">
     <legend>Product Image</legend>
 
-    <%= image_tag @product.image.url if @product.image %>
-
     <%= f.label :image %>
     <%= f.file_field :image %>
+
+    <%= image_tag @product.image.url if @product.image.present? %>
   </fieldset>
 
   <fieldset id="actions">
