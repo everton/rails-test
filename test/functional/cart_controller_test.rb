@@ -51,7 +51,7 @@ class CartControllerTest < ActionController::TestCase
           assert_select 'input[type=?][name=?][value=?]', 'hidden',
             "#{prefix}[id]", li.id.to_s
 
-          assert_select '.sub_total', "$ #{li.total}"
+          assert_select '.sub_total .price', "$ #{li.total}"
         end
       end
 
