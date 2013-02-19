@@ -2,8 +2,8 @@ class Product < ActiveRecord::Base
   attr_accessible :description, :price, :name, :image
 
   has_attached_file :image, default_style: :medium,
-    path: ':rails_root/public/p/:id/:style/:basename.:extension',
-    url: '/p/:id/:style/:basename.:extension', styles: {
+    path: ':rails_root/public/images/p/:id/:style/:basename.:extension',
+    url: '/images/p/:id/:style/:basename.:extension', styles: {
       medium: ['300x225>', 'jpeg'], thumb: ['100x75>', 'jpeg']
     }
 
